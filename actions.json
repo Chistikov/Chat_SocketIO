@@ -1,3 +1,5 @@
 {
-  "SUCCESS_CONNECTION": "success_connection"
+  "SUCCESS_CONNECTION": "success_connection",
+  "INITIAL_SETUP": "initial_setup",
+  "DISPATCH_UUID": "dispatch_uuid"
 }
