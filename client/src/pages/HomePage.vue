@@ -18,7 +18,7 @@ export default {
     approve() {
       if (this.userName) {
         window.localStorage.setItem("userName", this.userName)
-        this.$router.push('/chat')
+        this.$router.push('/rooms')
       }
     }
   }
