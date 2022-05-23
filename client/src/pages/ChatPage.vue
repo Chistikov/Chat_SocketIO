@@ -38,6 +38,10 @@ export default {
       }
     })
 
+    this.$socket.on(actions.DISPATCH_ALL_USERS, (users) => {
+      console.log('ALL USERS :', users)
+    })
+
   }
 }
 </script>

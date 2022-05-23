@@ -1,5 +1,6 @@
 {
   "SUCCESS_CONNECTION": "success_connection",
   "INITIAL_SETUP": "initial_setup",
-  "DISPATCH_UUID": "dispatch_uuid"
+  "DISPATCH_UUID": "dispatch_uuid",
+  "DISPATCH_ALL_USERS": "dispatch_all_users"
 }

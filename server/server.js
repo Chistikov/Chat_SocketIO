@@ -35,7 +35,14 @@ io.on('connection', (socket) => {
       console.log('New user', userData)
       socket.emit(actions.DISPATCH_UUID, uuidv4)
     } else {
+      const foundUserByUUID = users.find(u => u.uuid === user.uuid)
+      foundUserByUUID.socket = socket;
       socket.emit(actions.DISPATCH_UUID, user.uuid)
+      socket.emit(actions.DISPATCH_ALL_USERS, users.map(user=> ({
+        userName: user.userName,
+        uuid: user.uuid,
+        socketId: user.socket.id
+      })))
     }
   })
 });
