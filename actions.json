@@ -2,5 +2,8 @@
   "SUCCESS_CONNECTION": "success_connection",
   "INITIAL_SETUP": "initial_setup",
   "DISPATCH_UUID": "dispatch_uuid",
-  "DISPATCH_ALL_USERS": "dispatch_all_users"
+  "DISPATCH_ALL_USERS": "dispatch_all_users",
+  "JOIN_TO_ROOM": "join_to_room",
+  "NOTIFY_TO_ROOM": "notify_to_room",
+  "CHAT_MSG": "chat_msg"
 }

@@ -6,7 +6,7 @@ import RoomsPage from "./pages/RoomsPage"
 const routes = [
   {path: "/", component: HomePage},
   {path: "/rooms", component: RoomsPage},
-  {path: "/chat", component: ChatPage}
+  {path: "/chat/:roomId", component: ChatPage}
 ]
 
 export default createRouter({

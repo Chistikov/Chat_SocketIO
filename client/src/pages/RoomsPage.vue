@@ -1,12 +1,27 @@
 <template>
-  rooms page
+  <div class="wrapper">
+    <div class="rooms-container">
+      rooms
+      <hr>
+      <div v-for="(room, key) in rooms" :key="key">
+        <router-link :to="`/chat/${key}`" class="rooms-container__room">{{ room.name }}</router-link>
+      </div>
+    </div>
+  </div>
+  
 </template>
 
 <script>
+import api from '@/../api'
 import actions from '../../../actions.json'
 
 export default {
-  mounted() {
+  data: () => ({
+    rooms: null
+  }),
+  async mounted() {
+    this.rooms = await api.fetchRooms()
+
     console.log(this.$socket)
     if (!window.localStorage.getItem("userName")) {
       this.$router.push('/')
@@ -45,3 +60,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 59px);
+}
+.rooms-container {
+  width: 500px;
+  text-align: center;
+}
+.rooms-container__room {
+  color: #ccc;
+  text-decoration: none;
+}
+</style>

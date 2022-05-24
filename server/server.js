@@ -1,20 +1,33 @@
 const express = require('express');
 const app = express();
 const http = require('http');
+var cors = require('cors')
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 const { v4 } = require('uuid')
 
-const actions = require("../actions.json")
+const actions = require("../actions.json");
+const { on } = require('events');
 
 const PORT = process.env.PORT || 3000
 
+app.use(cors({
+  origin: '*'
+}));
 
+const rooms = {
+  123: {
+    name: 'Комната для общения 1',
+  },
+  124: {
+    name: 'Комната для общения 2',
+  },
+}
 const users = []
 
-app.get('/', (req, res) => {
-  res.send("works");
+app.get('/get-rooms-list', (req, res) => {
+  res.send(rooms);
 });
 
 io.on('connection', (socket) => {
@@ -44,6 +57,21 @@ io.on('connection', (socket) => {
         socketId: user.socket.id
       })))
     }
+  })
+
+  socket.on(actions.JOIN_TO_ROOM, connectionData => {
+    console.warn(connectionData)
+    socket.join(connectionData.roomId)
+    socket.to(connectionData.roomId).emit(actions.NOTIFY_TO_ROOM, `User ${connectionData.userName} (${connectionData.userId}) connected!`)
+  })
+
+  socket.on(actions.CHAT_MSG, chatMsg => {
+    // TODO: set up msg to stack
+    console.log(chatMsg)
+    socket.to(chatMsg.chatId).emit(actions.CHAT_MSG, {
+      userName: chatMsg.userName,
+      msg: chatMsg.msg
+    })
   })
 });
 
